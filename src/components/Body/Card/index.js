@@ -1,7 +1,7 @@
 import "./index.css";
 import { Button, message } from "antd";
 
-function Card() {
+function Card({ course }) {
   const jumpCourse = (url) => {
     if (url) {
       window.open(url, "_blank");
@@ -11,40 +11,58 @@ function Card() {
       );
     }
   };
+  // "coverImg": "https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/efeb8e1a01904b0690128627433d2552~tplv-k3u1fbpfcp-watermark.image?",
+  // "title": "Nest 通关秘籍",
+  // "summary": "掌握 Nest 和各种后端中间件，通过大量实战成为真正的全栈工程师！",
+  // "buyCount": 2216,
+  // "price": "89.9",
+  // "isDiscount": true,
+  // "discountPrice": "53.94",
+  // "returnRedPacket": "17.98",
+  // "shareUrl": "https://juejin.cn/book/7226988578700525605?suid=3350967171169901&source=pc"
   return (
     <div
       className="card"
       onClick={() => {
-        jumpCourse("");
+        jumpCourse(course.shareUrl);
       }}
     >
       <div>
-        <img
-          alt="img"
-  				referrerPolicy="no-referrer"
-          className="background"
-          src="https://static001.geekbang.org/resource/image/55/c8/5563a7294b2bfd563ae1227011d897c8.jpg"
-        />
+        <img alt="img" referrerPolicy="no-referrer" className="background" src={course.coverImg} />
       </div>
       <div className="content">
         <div className="info">
-          <div className="title">测试标题</div>
-          <div className="author">作者</div>
-          <div className="people">999 人已学习</div>
+          <div className="title">{course.title}</div>
+          <div className="author">{course.summary}</div>
+          <div className="people">{course.buyCount} 人已学习</div>
         </div>
         <div className="action">
           <div className="action-left">
-            <div className="price">
-              <div className="promotion">限时 : ¥99</div>
-              <div className="origin">原价 : ¥199</div>
+            {course.isDiscount && (
+              <div className="price">
+                <div className="promotion">限时 : ¥{course.discountPrice}</div>
+                <div className="origin">原价 : ¥{course.price}</div>
+              </div>
+            )}
+            {!course.isDiscount && (
+              <div className="price">
+                <div className="promotion">¥{course.price}</div>
+              </div>
+            )}
+            <div className="return">
+              成功购买后可得红包¥{course.returnRedPacket}
             </div>
-
-            <div className="return">成功购买后可得红包¥18</div>
           </div>
           <div className="aciton-right">
-            <Button className="button" shape="round" type="primary">
-              立即购买
-            </Button>
+            {course.shareUrl ? (
+              <Button className="button" shape="round" type="primary">
+                立即购买
+              </Button>
+            ) : (
+              <Button className="button" shape="round" type="primary">
+                等待更新
+              </Button>
+            )}
           </div>
         </div>
       </div>
