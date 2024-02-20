@@ -9,6 +9,8 @@
   "author": "Angel29",
   "license": "ISC",
   "dependencies": {
+    "koa": "^2.15.0",
+    "koa-router": "^12.0.1",
     "node-fetch": "^2.7.0",
     "node-xlsx": "^0.23.0"
   }
